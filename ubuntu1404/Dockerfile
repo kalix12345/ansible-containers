@@ -18,9 +18,10 @@ RUN /usr/sbin/enable_insecure_key
 
 RUN echo 'root:gns3' | chpasswd
 RUN sed -i "s/#PermitRootLogin without-password/PermitRootLogin yes/" /etc/ssh/sshd_config
+RUN sed -i "s/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/" /etc/ssh/sshd_config
+RUN sed -i "s/#ListenAddress ::/ListenAddress ::/" /etc/ssh/sshd_config
 
-RUN useradd --create-home --home-dir /home/ansible ansible \
-    && chown -R ansible:ansible /home/ansible
+RUN useradd -m -p gns3 ansible 
 
 RUN sudo -u ansible -- ssh-keygen -f /home/ansible/.ssh/id_rsa -t rsa -N ''
 
