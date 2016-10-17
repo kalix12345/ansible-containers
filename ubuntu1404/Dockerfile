@@ -6,7 +6,7 @@ CMD ["/sbin/my_init"]
 # Tell debconf to run in non-interactive mode
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get install -y wget git zip
+RUN apt-get update && apt-get install -y wget python-pip
 
 # Enable SSH loging provided by Baseimage docker and regenerate keys
 RUN rm -f /etc/service/sshd/down
@@ -21,16 +21,9 @@ RUN sed -i "s/#PermitRootLogin without-password/PermitRootLogin yes/" /etc/ssh/s
 RUN sed -i "s/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/" /etc/ssh/sshd_config
 RUN sed -i "s/#ListenAddress ::/ListenAddress ::/" /etc/ssh/sshd_config
 
-RUN useradd -m -p gns3 ansible 
-
-RUN sudo -u ansible -- ssh-keygen -f /home/ansible/.ssh/id_rsa -t rsa -N ''
-
-# Add ansible user to sudoers
-RUN echo 'ansible  ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
-
-
 # Clean up APT
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* 
+RUN apt-get -y install python-pip
 
 # start command
 # /etc/init.d/ssh restart
