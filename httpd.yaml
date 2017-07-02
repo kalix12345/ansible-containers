@@ -1,0 +1,21 @@
+--- # This is an example to install and start httpd on centos7 container
+- hosts: centos
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+  vars:
+    username: username
+  tasks:
+  - name: Install HTTPD on Centos on centos7 container
+    yum:
+      name: httpd
+      state: latest
+    notify:
+    - startservice
+  handlers:
+  - name: startservice
+    service:
+      name: httpd
+      state: restarted

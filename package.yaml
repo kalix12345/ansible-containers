@@ -1,0 +1,17 @@
+--- # This is an example to install and start package
+- hosts: '{{ hostgroup }}' 
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+  vars:
+    hostgroup: centos
+    package: telnet
+    hosttype: Vmware machine
+    packagestate: latest
+  tasks:
+  - name: Install '{{ package }}' on '{{ hostgroup  }}' '{{ hosttype }}'
+    yum:
+      name: '{{ package }}'
+      state: '{{ packagestate }}'
