@@ -1,11 +1,10 @@
 #!/bin/bash
-rsync -av --progress /backup/passwd  /etc/ 
-rsync -av --progress /backup/shadow  /etc/ 
+rsync -av --progress /backup/passwd  /etc/
+rsync -av --progress /backup/shadow  /etc/
 rsync -av --progress /backup/group /etc/
 rsync -av --progress /backup/gshadow /etc/
 rsync -av --progress /backup/hosts /etc/
-rsync -av --progress /backup/ssh /etc/
 rsync -av --progress /backup/ansible /etc/
+rsync -av --progress /backup/.ssh ~
 rsync -av --progress /backup/home /
-rsync -av --progress /backup/root / 
-
+rsync -av --progress /backup/root /
