@@ -20,6 +20,8 @@ USER ansible
 RUN ssh-keygen -f /home/ansible/.ssh/id_rsa -t rsa -N ''
 
 USER root
+RUN echo root:gns3d0cker | chpasswd
+
 # Add ansible to sudoers
 RUN echo 'ansible  ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
