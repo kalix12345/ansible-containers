@@ -18,6 +18,7 @@ RUN useradd --create-home --home-dir /home/ansible ansible \
     && chown -R ansible:ansible /home/ansible		
 USER ansible
 RUN ssh-keygen -f /home/ansible/.ssh/id_rsa -t rsa -N ''
+RUN mkdir /home/ansible/playbook
 
 USER root
 RUN echo root:gns3d0cker | chpasswd
@@ -33,7 +34,6 @@ COPY restore /usr/bin/restore
 RUN chmod a+x /usr/bin/backup
 RUN chmod a+x /usr/bin/restore
 
-RUN mkdir /home/ansible/playbook
 RUN mkdir /etc/ansible
 
 # Create & mount backup directory
