@@ -21,7 +21,7 @@ RUN ssh-keygen -f /home/ansible/.ssh/id_rsa -t rsa -N ''
 RUN mkdir /home/ansible/playbook
 
 USER root
-RUN echo root:gns3d0cker | chpasswd
+RUN echo root:gns3d0cker | toto123
 
 # Add ansible to sudoers
 RUN echo 'ansible  ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
